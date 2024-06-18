@@ -1,5 +1,6 @@
 package com.ead.course.dtos;
 
+
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

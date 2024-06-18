@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 import java.util.List;
 
+
 @Configuration
 public class ResolverConfig extends WebMvcConfigurationSupport {
 
@@ -19,4 +20,5 @@ public class ResolverConfig extends WebMvcConfigurationSupport {
         argumentResolvers.add(resolver);
         super.addArgumentResolvers(argumentResolvers);
     }
+
 }

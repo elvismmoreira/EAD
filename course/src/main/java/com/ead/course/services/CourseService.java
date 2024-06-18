@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CourseService {
-    void delete (CourseModel courseModel);
+    void delete(CourseModel courseModel);
 
     CourseModel save(CourseModel courseModel);
 

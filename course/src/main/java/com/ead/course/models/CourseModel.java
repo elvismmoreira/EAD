@@ -1,5 +1,6 @@
 package com.ead.course.models;
 
+
 import com.ead.course.enums.CourseLevel;
 import com.ead.course.enums.CourseStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -25,16 +26,16 @@ public class CourseModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID courseId;
-    @Column(nullable = false,length = 150)
+    @Column(nullable = false, length = 150)
     private String name;
-    @Column(nullable = false,length = 250)
+    @Column(nullable = false, length = 250)
     private String description;
     @Column
     private String imageUrl;
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
     @Column(nullable = false)
     private LocalDateTime creationDate;
-   @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
     @Column(nullable = false)
     private LocalDateTime lastUpdateDate;
     @Column(nullable = false)
@@ -47,7 +48,16 @@ public class CourseModel implements Serializable {
     private UUID userInstructor;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY )
     @Fetch(FetchMode.SUBSELECT)
     private Set<ModuleModel> modules;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    private Set<CourseUserModel> coursesUsers;
+
+    public CourseUserModel convertToCourseUserModel(UUID userID){
+        return new CourseUserModel(null, userID, this);
+    }
+
 }

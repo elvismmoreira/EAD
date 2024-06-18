@@ -10,8 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,7 +29,7 @@ public class ModuleServiceImpl implements ModuleService {
     @Override
     public void delete(ModuleModel moduleModel) {
         List<LessonModel> lessonModelList = lessonRepository.findAllLessonsIntoModule(moduleModel.getModuleId());
-        if(!lessonModelList.isEmpty()) {
+        if (!lessonModelList.isEmpty()){
             lessonRepository.deleteAll(lessonModelList);
         }
         moduleRepository.delete(moduleModel);
@@ -47,7 +47,7 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public List<ModuleModel> findAllByCourse(UUID courseId) {
-        return moduleRepository.findAllModulesIntoCourse(courseId);
+        return moduleRepository.findAllLModulesIntoCourse(courseId);
     }
 
     @Override
@@ -57,6 +57,6 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public Page<ModuleModel> findAllByCourse(Specification<ModuleModel> spec, Pageable pageable) {
-        return moduleRepository.findAll(spec,pageable);
+        return moduleRepository.findAll(spec, pageable);
     }
 }
