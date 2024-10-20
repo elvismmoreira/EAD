@@ -7,7 +7,7 @@ spring:
   application:
     name: ead-course-service
   datasource:
-    url:  jdbc:postgresql://localhost:5432/ead-course
+    url:  jdbc:postgresql://localhost:5432/ead-course-v2
     username: Elvis
     password: nirvana
   jpa:
@@ -22,6 +22,8 @@ spring:
   output:
     ansi:
       enabled: Always
+  rabbitmq:
+    addresses: amqps://cuvxovlv:iGm8Mi_FBfpvvrXlF592oyJe0VIFiYjI@moose.rmq.cloudamqp.com/cuvxovlv
 
 
 logging:
@@ -35,6 +37,12 @@ ead:
   api:
     url:
       authuser: 'http://ead-authuser-service/ead-authuser'
+  broker:
+    exchange:
+      userEventExchange: ead.userevent
+    queue:
+      userEventQueue:
+        name: ead.userevent.ms.course
 
 eureka:
   client:
